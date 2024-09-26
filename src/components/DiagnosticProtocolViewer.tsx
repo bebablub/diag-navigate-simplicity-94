@@ -4,31 +4,14 @@ import HVCheckReportOverview from './HVCheckReportOverview';
 import HVCheckReportDetails from './HVCheckReportDetails';
 
 const DiagnosticProtocolViewer: React.FC = () => {
-  const [currentPage, setCurrentPage] = useState(1);
   const [zoomLevel, setZoomLevel] = useState(100);
-
-  const totalPages = 2;
 
   return (
     <div className="h-full flex flex-col">
       <div className="bg-white p-4 shadow-md">
         <div className="flex justify-between items-center">
           <div className="flex items-center space-x-2">
-            <button 
-              className="p-2 hover:bg-gray-200 rounded" 
-              onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
-              disabled={currentPage === 1}
-            >
-              Previous
-            </button>
-            <span>Page {currentPage} of {totalPages}</span>
-            <button 
-              className="p-2 hover:bg-gray-200 rounded" 
-              onClick={() => setCurrentPage(prev => Math.min(totalPages, prev + 1))}
-              disabled={currentPage === totalPages}
-            >
-              Next
-            </button>
+            <span>HV-CHECK Zustandprotokoll HV Sicherheit</span>
           </div>
           <div className="flex items-center space-x-2">
             <button className="p-2 hover:bg-gray-200 rounded" onClick={() => setZoomLevel(prev => Math.max(50, prev - 10))}>
@@ -60,8 +43,11 @@ const DiagnosticProtocolViewer: React.FC = () => {
         </div>
       </div>
       <div className="flex-grow overflow-auto p-4">
-        <div className="bg-white p-4 shadow-md h-full" style={{ transform: `scale(${zoomLevel / 100})`, transformOrigin: 'top left' }}>
-          {currentPage === 1 ? <HVCheckReportOverview /> : <HVCheckReportDetails />}
+        <div className="bg-white p-4 shadow-md" style={{ transform: `scale(${zoomLevel / 100})`, transformOrigin: 'top left' }}>
+          <div className="space-y-4">
+            <HVCheckReportOverview />
+            <HVCheckReportDetails />
+          </div>
         </div>
       </div>
     </div>
