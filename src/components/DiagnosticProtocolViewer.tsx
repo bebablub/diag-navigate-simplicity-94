@@ -1,29 +1,41 @@
 import React, { useState } from 'react';
 import { Search, ZoomIn, ZoomOut, Download, Printer } from 'lucide-react';
+import HVCheckReportOverview from './HVCheckReportOverview';
+import HVCheckReportDetails from './HVCheckReportDetails';
 
 const DiagnosticProtocolViewer: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [zoomLevel, setZoomLevel] = useState(100);
+
+  const totalPages = 2;
 
   return (
     <div className="h-full flex flex-col">
       <div className="bg-white p-4 shadow-md">
         <div className="flex justify-between items-center">
           <div className="flex items-center space-x-2">
-            <button className="p-2 hover:bg-gray-200 rounded" onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}>
+            <button 
+              className="p-2 hover:bg-gray-200 rounded" 
+              onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
+              disabled={currentPage === 1}
+            >
               Previous
             </button>
-            <span>Page {currentPage} of 10</span>
-            <button className="p-2 hover:bg-gray-200 rounded" onClick={() => setCurrentPage(prev => Math.min(10, prev + 1))}>
+            <span>Page {currentPage} of {totalPages}</span>
+            <button 
+              className="p-2 hover:bg-gray-200 rounded" 
+              onClick={() => setCurrentPage(prev => Math.min(totalPages, prev + 1))}
+              disabled={currentPage === totalPages}
+            >
               Next
             </button>
           </div>
           <div className="flex items-center space-x-2">
-            <button className="p-2 hover:bg-gray-200 rounded" onClick={() => setZoomLevel(prev => prev - 10)}>
+            <button className="p-2 hover:bg-gray-200 rounded" onClick={() => setZoomLevel(prev => Math.max(50, prev - 10))}>
               <ZoomOut size={20} />
             </button>
             <span>{zoomLevel}%</span>
-            <button className="p-2 hover:bg-gray-200 rounded" onClick={() => setZoomLevel(prev => prev + 10)}>
+            <button className="p-2 hover:bg-gray-200 rounded" onClick={() => setZoomLevel(prev => Math.min(200, prev + 10))}>
               <ZoomIn size={20} />
             </button>
           </div>
@@ -48,9 +60,8 @@ const DiagnosticProtocolViewer: React.FC = () => {
         </div>
       </div>
       <div className="flex-grow overflow-auto p-4">
-        {/* Placeholder for PDF content */}
-        <div className="bg-white p-4 shadow-md h-full">
-          <p>PDF content will be displayed here.</p>
+        <div className="bg-white p-4 shadow-md h-full" style={{ transform: `scale(${zoomLevel / 100})`, transformOrigin: 'top left' }}>
+          {currentPage === 1 ? <HVCheckReportOverview /> : <HVCheckReportDetails />}
         </div>
       </div>
     </div>
