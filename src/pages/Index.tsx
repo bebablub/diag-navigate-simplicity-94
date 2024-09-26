@@ -1,10 +1,10 @@
 import React from 'react';
-import EVDiagnosticModule from '../components/EVDiagnosticModule';
+import HVCheckReport from '../components/HVCheckReport';
 
 const Index: React.FC = () => {
   return (
     <div className="min-h-screen bg-gray-100">
-      <EVDiagnosticModule />
+      <HVCheckReport />
     </div>
   );
 };
