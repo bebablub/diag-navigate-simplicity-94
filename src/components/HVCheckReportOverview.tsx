@@ -26,7 +26,7 @@ const HVCheckReportOverview: React.FC<HVCheckReportOverviewProps> = ({ generalDa
   }
 
   return (
-    <div className="p-6 border border-gray-300 bg-white">
+    <div className="p-6 border-b border-gray-300">
       <div className="flex justify-between items-start mb-8">
         <div>
           <h1 className="text-3xl font-bold">HV-CHECK</h1>
@@ -37,7 +37,7 @@ const HVCheckReportOverview: React.FC<HVCheckReportOverviewProps> = ({ generalDa
       
       <div className="mb-8">
         <h3 className="text-lg font-bold mb-2">Prüfdaten</h3>
-        <div className="flex justify-between text-sm">
+        <div className="flex flex-col sm:flex-row justify-between text-sm">
           <span>Datum: {generalData.date}</span>
           <span>Protokollnr.: {generalData.protocolNumber}</span>
         </div>
@@ -45,7 +45,7 @@ const HVCheckReportOverview: React.FC<HVCheckReportOverviewProps> = ({ generalDa
       
       <div className="mb-8">
         <h3 className="text-lg font-bold mb-2">Fahrzeugdaten</h3>
-        <div className="grid grid-cols-2 gap-y-1 text-sm">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-1 text-sm">
           <div>Marke: {generalData.brand}</div>
           <div>Kilometerstand: {generalData.mileage}</div>
           <div>Modell: {generalData.model}</div>
@@ -73,11 +73,6 @@ const HVCheckReportOverview: React.FC<HVCheckReportOverviewProps> = ({ generalDa
         <p>Die Ermittlung der Zustände der Isolationswiderstände erfolgt entsprechend den UN ECE R100 Grenzwerten.</p>
         <p>Für tiefergehende Sicherheitsanalysen ist entsprechendes zertifiziertes Messequipment notwendig.</p>
         <p>siehe auch: http://avlditest/workshop</p>
-      </div>
-      
-      <div className="mt-8 text-xs text-right">
-        <p>AVL DITEST XDS iReport v2.0.03 * VC1 1.28.05</p>
-        <p>1/2</p>
       </div>
     </div>
   );

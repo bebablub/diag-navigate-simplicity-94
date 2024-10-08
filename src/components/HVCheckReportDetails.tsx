@@ -52,18 +52,10 @@ const HVCheckReportDetails: React.FC<HVCheckReportDetailsProps> = ({ safetyIndic
   }
 
   return (
-    <div className="p-6 border border-gray-300 bg-white">
-      <div className="flex justify-between items-start mb-8">
-        <div>
-          <h1 className="text-3xl font-bold">HV-CHECK</h1>
-          <h2 className="text-xl">Zustandprotokoll HV Sicherheit</h2>
-        </div>
-        <img src="/avl-ditest-logo.png" alt="AVL DITEST" className="w-24" />
-      </div>
-      
+    <div className="p-6">
       <div className="mb-8">
         <h3 className="text-lg font-bold mb-4">Sicherheitsindikatoren</h3>
-        <div className="grid grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           <div>
             <h4 className="font-semibold mb-2">Isolationswiderstände</h4>
             <div className="grid grid-cols-2 gap-y-1 text-sm">
@@ -101,7 +93,7 @@ const HVCheckReportDetails: React.FC<HVCheckReportDetailsProps> = ({ safetyIndic
       
       <div className="mb-8">
         <h3 className="text-lg font-bold mb-4">Batterieinformationen</h3>
-        <div className="grid grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           <div>
             <h4 className="font-semibold mb-2">Steuergerätedaten</h4>
             <div className="grid grid-cols-2 gap-y-1 text-sm">

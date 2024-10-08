@@ -79,11 +79,17 @@ const HVCheckReport: React.FC = () => {
   }
 
   return (
-    <div className="flex h-screen">
-      <div className="w-3/5 bg-gray-100 overflow-auto">
-        <DiagnosticProtocolViewer reportData={reportData} />
+    <div className="flex flex-col lg:flex-row h-screen">
+      <div className="w-full lg:w-2/3 bg-gray-100 flex flex-col">
+        <div className="bg-white p-4 shadow-md">
+          {/* PDF tooling */}
+          {/* ... Add PDF tooling buttons here */}
+        </div>
+        <div className="flex-grow overflow-auto">
+          <DiagnosticProtocolViewer reportData={reportData} />
+        </div>
       </div>
-      <div className="w-2/5 bg-white">
+      <div className="w-full lg:w-1/3 bg-white border-l border-gray-300">
         <InsightsPanel />
       </div>
     </div>
