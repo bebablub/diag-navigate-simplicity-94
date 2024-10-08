@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Search, Edit, Copy, Mail, Shield, Battery } from 'lucide-react';
+import { Search } from 'lucide-react';
 import CustomerFriendlySummary from './insights/CustomerFriendlySummary';
 import MainIssuesDetected from './insights/MainIssuesDetected';
 import SafetyAssessment from './insights/SafetyAssessment';

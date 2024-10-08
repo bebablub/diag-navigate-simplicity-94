@@ -85,7 +85,7 @@ const HVCheckReport: React.FC = () => {
         <DiagnosticProtocolViewer reportData={reportData} />
       </div>
       <div className="w-2/5 bg-white">
-        <InsightsPanel reportData={reportData} />
+        <InsightsPanel />
       </div>
     </div>
   );
