@@ -4,7 +4,58 @@ import HVCheckReportOverview from './HVCheckReportOverview';
 import HVCheckReportDetails from './HVCheckReportDetails';
 
 interface DiagnosticProtocolViewerProps {
-  reportData: any; // Replace 'any' with a more specific type if available
+  reportData: {
+    general: {
+      date: string;
+      protocolNumber: string;
+      brand: string;
+      model: string;
+      mileage: string;
+      vin: string;
+    };
+    overview: {
+      hvSystem: string;
+      isolationResistance: string;
+      errorCodes: string;
+    };
+    safetyIndicators: {
+      isolationResistance: {
+        minusPoleBattery: string;
+        plusPoleBattery: string;
+        minusPoleSystem: string;
+        plusPoleSystem: string;
+      };
+      hvSystem: {
+        crashSignal: string;
+        pilotLine: string;
+        voltageFreedom: string;
+        chargingContactorPositive: string;
+        chargingContactorNegative: string;
+        batteryContactorPositive: string;
+        batteryContactorNegative: string;
+      };
+    };
+    batteryInformation: {
+      controlUnitData: {
+        stateOfHealth: string;
+        stateOfCharge: string;
+        maxDiffCellCharge: string;
+        maxDiffCellVoltage: string;
+        maxCellVoltage: string;
+        minCellVoltage: string;
+      };
+      temperatures: {
+        batteryTemperature: string;
+        maxDiffCellTemperature: string;
+        maxCellTemperature: string;
+        minCellTemperature: string;
+      };
+    };
+    errorCodes: Array<{
+      code: string;
+      description: string;
+    }>;
+  };
 }
 
 const DiagnosticProtocolViewer: React.FC<DiagnosticProtocolViewerProps> = ({ reportData }) => {

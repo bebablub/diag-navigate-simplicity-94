@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import DiagnosticProtocolViewer from './DiagnosticProtocolViewer';
 import InsightsPanel from './InsightsPanel';
+import { simulatedApiResponse } from '../utils/simulatedApiResponse';
 
-// This interface represents the structure of the data we expect from the API
 interface ReportData {
   general: {
     date: string;
@@ -60,13 +60,12 @@ const HVCheckReport: React.FC = () => {
   const [reportData, setReportData] = useState<ReportData | null>(null);
 
   useEffect(() => {
-    // This is where you would fetch the data from your API
+    // Simulate API call with a delay
     const fetchReportData = async () => {
       try {
-        // Replace this with your actual API call
-        const response = await fetch('/api/report-data');
-        const data = await response.json();
-        setReportData(data);
+        // Simulate network delay
+        await new Promise(resolve => setTimeout(resolve, 1000));
+        setReportData(simulatedApiResponse as ReportData);
       } catch (error) {
         console.error('Error fetching report data:', error);
       }
