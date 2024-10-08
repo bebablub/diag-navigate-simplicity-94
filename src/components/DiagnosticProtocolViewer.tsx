@@ -1,6 +1,7 @@
 import React from 'react';
 import HVCheckReportOverview from './HVCheckReportOverview';
 import HVCheckReportDetails from './HVCheckReportDetails';
+import { Card } from './ui/card';
 
 interface ReportData {
   general: {
@@ -66,29 +67,37 @@ const DiagnosticProtocolViewer: React.FC<DiagnosticProtocolViewerProps> = ({ rep
     transformOrigin: 'top center',
     width: '210mm',
     height: '297mm',
-    margin: '0 auto',
-    padding: '20mm',
+    margin: '0 auto 20px',
+    padding: '10mm',
     boxSizing: 'border-box' as const,
     backgroundColor: 'white',
     boxShadow: '0 0 10px rgba(0,0,0,0.1)',
+    fontSize: '10px',
+    lineHeight: '1.2',
+  };
+
+  const cardStyle = {
+    border: '1px solid #e0e0e0',
+    borderRadius: '4px',
+    overflow: 'hidden',
   };
 
   return (
     <div className="space-y-8">
-      <div style={pageStyle}>
+      <Card style={{...pageStyle, ...cardStyle}}>
         <HVCheckReportOverview
           generalData={reportData.general}
           overviewResult={reportData.overview}
         />
-      </div>
-      <div style={pageStyle}>
+      </Card>
+      <Card style={{...pageStyle, ...cardStyle}}>
         <HVCheckReportDetails
           generalData={reportData.general}
           safetyIndicators={reportData.safetyIndicators}
           batteryInformation={reportData.batteryInformation}
           errorCodes={reportData.errorCodes}
         />
-      </div>
+      </Card>
     </div>
   );
 };

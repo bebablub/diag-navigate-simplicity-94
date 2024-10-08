@@ -1,4 +1,5 @@
 import React from 'react';
+import { Separator } from './ui/separator';
 
 interface GeneralData {
   date: string;
@@ -62,26 +63,30 @@ const HVCheckReportDetails: React.FC<HVCheckReportDetailsProps> = ({ generalData
   }
 
   return (
-    <div className="flex flex-col h-full">
-      <div className="flex justify-between items-start mb-6">
+    <div className="flex flex-col h-full text-xs">
+      <div className="flex justify-between items-start mb-4">
         <div>
-          <h1 className="text-2xl font-bold">HV-CHECK</h1>
-          <h2 className="text-lg">Zustandprotokoll HV Sicherheit</h2>
+          <h1 className="text-xl font-bold">HV-CHECK</h1>
+          <h2 className="text-sm">Zustandprotokoll HV Sicherheit</h2>
         </div>
-        <img src="/avl-ditest-logo.png" alt="AVL DITEST" className="w-20" />
+        <img src="/avl-ditest-logo.png" alt="AVL DITEST" className="w-16" />
       </div>
 
-      <div className="mb-4">
-        <h3 className="text-base font-bold mb-2">Prüfdaten</h3>
-        <div className="flex justify-between text-sm">
+      <Separator className="my-2" />
+
+      <div className="mb-2">
+        <h3 className="text-sm font-bold mb-1">Prüfdaten</h3>
+        <div className="flex justify-between">
           <span>Datum: {generalData.date}</span>
           <span>Protokollnr.: {generalData.protocolNumber}</span>
         </div>
       </div>
 
-      <div className="mb-6">
-        <h3 className="text-base font-bold mb-2">Sicherheitsindikatoren</h3>
-        <div className="grid grid-cols-2 gap-4 text-sm">
+      <Separator className="my-2" />
+
+      <div className="mb-4">
+        <h3 className="text-sm font-bold mb-2">Sicherheitsindikatoren</h3>
+        <div className="grid grid-cols-2 gap-4">
           <div>
             <h4 className="font-semibold mb-1">Isolationswiderstände</h4>
             <div className="grid grid-cols-2 gap-y-1">
@@ -117,9 +122,11 @@ const HVCheckReportDetails: React.FC<HVCheckReportDetailsProps> = ({ generalData
         </div>
       </div>
       
-      <div className="mb-6">
-        <h3 className="text-base font-bold mb-2">Batterieinformationen</h3>
-        <div className="grid grid-cols-2 gap-4 text-sm">
+      <Separator className="my-2" />
+      
+      <div className="mb-4">
+        <h3 className="text-sm font-bold mb-2">Batterieinformationen</h3>
+        <div className="grid grid-cols-2 gap-4">
           <div>
             <h4 className="font-semibold mb-1">Steuergerätedaten</h4>
             <div className="grid grid-cols-2 gap-y-1">
@@ -153,9 +160,11 @@ const HVCheckReportDetails: React.FC<HVCheckReportDetailsProps> = ({ generalData
         </div>
       </div>
       
-      <div className="mb-6">
-        <h3 className="text-base font-bold mb-2">Fehlercodes</h3>
-        <table className="w-full text-sm">
+      <Separator className="my-2" />
+      
+      <div className="mb-4">
+        <h3 className="text-sm font-bold mb-2">Fehlercodes</h3>
+        <table className="w-full">
           <thead>
             <tr className="border-b">
               <th className="text-left py-1">Fehlercodes</th>
@@ -174,7 +183,7 @@ const HVCheckReportDetails: React.FC<HVCheckReportDetailsProps> = ({ generalData
       </div>
       
       <div className="mt-auto">
-        <div className="text-xs text-right">
+        <div className="text-[8px] text-right">
           <p>AVL DITEST XDS iReport v2.0.03 * VC1 1.28.05</p>
           <p>2/2</p>
         </div>
