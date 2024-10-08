@@ -17,7 +17,7 @@ const MainIssuesDetected: React.FC = () => {
     {
       code: 'PGA1F00',
       severity: 'Moderate',
-      description: 'Battery Energy Management System Malfunction - This issue may affect the proper regulation of the battery's energy usage.',
+      description: "Battery Energy Management System Malfunction - This issue may affect the proper regulation of the battery's energy usage.",
       details: 'Possible software or hardware issues in the energy management controller.',
       recommendedAction: 'Update software or schedule inspection.',
     },
