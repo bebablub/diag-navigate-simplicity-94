@@ -1,55 +1,45 @@
 import React, { useState } from 'react';
-import { Search } from 'lucide-react';
+import { AlertTriangle, Battery, Car, Tool, HelpCircle } from 'lucide-react';
 import { Card } from './ui/card';
-import CustomerFriendlySummary from './insights/CustomerFriendlySummary';
-import MainIssuesDetected from './insights/MainIssuesDetected';
-import SafetyAssessment from './insights/SafetyAssessment';
-import ErrorCodeDefinitions from './insights/ErrorCodeDefinitions';
-import BatteryHealthComparison from './insights/BatteryHealthComparison';
+import { Button } from './ui/button';
+import SafetyAlerts from './insights/SafetyAlerts';
+import KeyFindings from './insights/KeyFindings';
+import HVSystemParameters from './insights/HVSystemParameters';
+import FAQSection from './insights/FAQSection';
+import DetailedExplanation from './insights/DetailedExplanation';
 
 const InsightsPanel: React.FC = () => {
-  const [searchQuery, setSearchQuery] = useState('');
+  const [selectedQuestion, setSelectedQuestion] = useState<string | null>(null);
+
+  const handleQuestionClick = (question: string) => {
+    setSelectedQuestion(question);
+  };
 
   return (
-    <div className="w-full h-full overflow-y-auto space-y-4">
+    <div className="w-full h-full overflow-y-auto space-y-4 p-4">
       <Card className="p-4 shadow-md">
-        <h2 className="text-xl font-semibold text-gray-800 mb-4">Report Insights and Explanations</h2>
-        <div className="relative">
-          <input
-            type="text"
-            placeholder="Ask me a question about this report ..."
-            className="w-full p-2 pl-10 border rounded-lg"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-          />
-          <Search className="absolute left-3 top-2.5 text-gray-400" size={20} />
+        <h2 className="text-xl font-semibold text-gray-800 mb-4">Insights & FAQs Panel</h2>
+        <SafetyAlerts />
+        <KeyFindings />
+        <HVSystemParameters />
+        <div className="mt-4 space-x-2">
+          <Button variant="destructive">View Critical Issues</Button>
+          <Button variant="outline">Access workSafe Procedure</Button>
+          <Button>Schedule Service</Button>
         </div>
       </Card>
-      <div className="space-y-4">
-        <InsightCard>
-          <CustomerFriendlySummary />
-        </InsightCard>
-        <InsightCard>
-          <MainIssuesDetected />
-        </InsightCard>
-        <InsightCard>
-          <SafetyAssessment />
-        </InsightCard>
-        <InsightCard>
-          <ErrorCodeDefinitions />
-        </InsightCard>
-        <InsightCard>
-          <BatteryHealthComparison />
-        </InsightCard>
-      </div>
+
+      <Card className="p-4 shadow-md">
+        <FAQSection onQuestionClick={handleQuestionClick} />
+      </Card>
+
+      {selectedQuestion && (
+        <Card className="p-4 shadow-md">
+          <DetailedExplanation question={selectedQuestion} />
+        </Card>
+      )}
     </div>
   );
 };
-
-const InsightCard: React.FC<{ children: React.ReactNode }> = ({ children }) => (
-  <Card className="p-4 shadow-md hover:shadow-lg transition-shadow duration-300 cursor-pointer">
-    {children}
-  </Card>
-);
 
 export default InsightsPanel;
