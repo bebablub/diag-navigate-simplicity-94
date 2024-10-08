@@ -61,16 +61,29 @@ interface DiagnosticProtocolViewerProps {
 }
 
 const DiagnosticProtocolViewer: React.FC<DiagnosticProtocolViewerProps> = ({ reportData, zoomLevel }) => {
+  const pageStyle = {
+    transform: `scale(${zoomLevel / 100})`,
+    transformOrigin: 'top center',
+    width: '210mm',
+    height: '297mm',
+    margin: '0 auto',
+    padding: '20mm',
+    boxSizing: 'border-box' as const,
+    backgroundColor: 'white',
+    boxShadow: '0 0 10px rgba(0,0,0,0.1)',
+  };
+
   return (
-    <div className="space-y-4">
-      <div className="bg-white shadow-md max-w-[210mm] mx-auto" style={{ transform: `scale(${zoomLevel / 100})`, transformOrigin: 'top center' }}>
+    <div className="space-y-8">
+      <div style={pageStyle}>
         <HVCheckReportOverview
           generalData={reportData.general}
           overviewResult={reportData.overview}
         />
       </div>
-      <div className="bg-white shadow-md max-w-[210mm] mx-auto" style={{ transform: `scale(${zoomLevel / 100})`, transformOrigin: 'top center' }}>
+      <div style={pageStyle}>
         <HVCheckReportDetails
+          generalData={reportData.general}
           safetyIndicators={reportData.safetyIndicators}
           batteryInformation={reportData.batteryInformation}
           errorCodes={reportData.errorCodes}

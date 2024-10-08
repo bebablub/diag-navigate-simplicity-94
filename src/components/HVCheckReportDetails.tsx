@@ -1,5 +1,14 @@
 import React from 'react';
 
+interface GeneralData {
+  date: string;
+  protocolNumber: string;
+  brand: string;
+  model: string;
+  mileage: string;
+  vin: string;
+}
+
 interface SafetyIndicators {
   isolationResistance: {
     minusPoleBattery: string;
@@ -41,24 +50,41 @@ interface ErrorCode {
 }
 
 interface HVCheckReportDetailsProps {
+  generalData: GeneralData;
   safetyIndicators: SafetyIndicators;
   batteryInformation: BatteryInformation;
   errorCodes: ErrorCode[];
 }
 
-const HVCheckReportDetails: React.FC<HVCheckReportDetailsProps> = ({ safetyIndicators, batteryInformation, errorCodes }) => {
+const HVCheckReportDetails: React.FC<HVCheckReportDetailsProps> = ({ generalData, safetyIndicators, batteryInformation, errorCodes }) => {
   if (!safetyIndicators || !batteryInformation || !errorCodes) {
     return <div>Loading details...</div>;
   }
 
   return (
-    <div className="p-6">
-      <div className="mb-8">
-        <h3 className="text-lg font-bold mb-4">Sicherheitsindikatoren</h3>
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+    <div className="flex flex-col h-full">
+      <div className="flex justify-between items-start mb-6">
+        <div>
+          <h1 className="text-2xl font-bold">HV-CHECK</h1>
+          <h2 className="text-lg">Zustandprotokoll HV Sicherheit</h2>
+        </div>
+        <img src="/avl-ditest-logo.png" alt="AVL DITEST" className="w-20" />
+      </div>
+
+      <div className="mb-4">
+        <h3 className="text-base font-bold mb-2">Prüfdaten</h3>
+        <div className="flex justify-between text-sm">
+          <span>Datum: {generalData.date}</span>
+          <span>Protokollnr.: {generalData.protocolNumber}</span>
+        </div>
+      </div>
+
+      <div className="mb-6">
+        <h3 className="text-base font-bold mb-2">Sicherheitsindikatoren</h3>
+        <div className="grid grid-cols-2 gap-4 text-sm">
           <div>
-            <h4 className="font-semibold mb-2">Isolationswiderstände</h4>
-            <div className="grid grid-cols-2 gap-y-1 text-sm">
+            <h4 className="font-semibold mb-1">Isolationswiderstände</h4>
+            <div className="grid grid-cols-2 gap-y-1">
               <div>Minuspol Hochvolt-Batterie</div>
               <div>{safetyIndicators.isolationResistance.minusPoleBattery}</div>
               <div>Pluspol Hochvolt-Batterie</div>
@@ -70,8 +96,8 @@ const HVCheckReportDetails: React.FC<HVCheckReportDetailsProps> = ({ safetyIndic
             </div>
           </div>
           <div>
-            <h4 className="font-semibold mb-2">HV-System</h4>
-            <div className="grid grid-cols-2 gap-y-1 text-sm">
+            <h4 className="font-semibold mb-1">HV-System</h4>
+            <div className="grid grid-cols-2 gap-y-1">
               <div>Crashsignal</div>
               <div>{safetyIndicators.hvSystem.crashSignal}</div>
               <div>Pilotlinie</div>
@@ -91,12 +117,12 @@ const HVCheckReportDetails: React.FC<HVCheckReportDetailsProps> = ({ safetyIndic
         </div>
       </div>
       
-      <div className="mb-8">
-        <h3 className="text-lg font-bold mb-4">Batterieinformationen</h3>
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="mb-6">
+        <h3 className="text-base font-bold mb-2">Batterieinformationen</h3>
+        <div className="grid grid-cols-2 gap-4 text-sm">
           <div>
-            <h4 className="font-semibold mb-2">Steuergerätedaten</h4>
-            <div className="grid grid-cols-2 gap-y-1 text-sm">
+            <h4 className="font-semibold mb-1">Steuergerätedaten</h4>
+            <div className="grid grid-cols-2 gap-y-1">
               <div>State of Health (SOH)</div>
               <div>{batteryInformation.controlUnitData.stateOfHealth}</div>
               <div>Ladezustand (SOC)</div>
@@ -112,8 +138,8 @@ const HVCheckReportDetails: React.FC<HVCheckReportDetailsProps> = ({ safetyIndic
             </div>
           </div>
           <div>
-            <h4 className="font-semibold mb-2">Temperaturen</h4>
-            <div className="grid grid-cols-2 gap-y-1 text-sm">
+            <h4 className="font-semibold mb-1">Temperaturen</h4>
+            <div className="grid grid-cols-2 gap-y-1">
               <div>Temperatur Batterie</div>
               <div>{batteryInformation.temperatures.batteryTemperature}</div>
               <div>max. diff. Zelltemperatur</div>
@@ -127,29 +153,31 @@ const HVCheckReportDetails: React.FC<HVCheckReportDetailsProps> = ({ safetyIndic
         </div>
       </div>
       
-      <div className="mb-8">
-        <h3 className="text-lg font-bold mb-2">Fehlercodes</h3>
+      <div className="mb-6">
+        <h3 className="text-base font-bold mb-2">Fehlercodes</h3>
         <table className="w-full text-sm">
           <thead>
             <tr className="border-b">
-              <th className="text-left py-2">Fehlercodes</th>
-              <th className="text-left py-2">Beschreibung</th>
+              <th className="text-left py-1">Fehlercodes</th>
+              <th className="text-left py-1">Beschreibung</th>
             </tr>
           </thead>
           <tbody>
             {errorCodes.map((error, index) => (
               <tr key={index} className="border-b">
-                <td className="py-2">{error.code}</td>
-                <td className="py-2">{error.description}</td>
+                <td className="py-1">{error.code}</td>
+                <td className="py-1">{error.description}</td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
       
-      <div className="mt-8 text-xs text-right">
-        <p>AVL DITEST XDS iReport v2.0.03 * VC1 1.28.05</p>
-        <p>2/2</p>
+      <div className="mt-auto">
+        <div className="text-xs text-right">
+          <p>AVL DITEST XDS iReport v2.0.03 * VC1 1.28.05</p>
+          <p>2/2</p>
+        </div>
       </div>
     </div>
   );
