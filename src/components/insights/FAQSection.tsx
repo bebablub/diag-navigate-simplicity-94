@@ -1,5 +1,5 @@
 import React from 'react';
-import { Car, AlertTriangle, Battery, Tool } from 'lucide-react';
+import { Car, AlertTriangle, Battery, Wrench } from 'lucide-react';
 
 interface FAQSectionProps {
   onQuestionClick: (question: string) => void;
@@ -15,9 +15,9 @@ const FAQSection: React.FC<FAQSectionProps> = ({ onQuestionClick }) => {
     { icon: <AlertTriangle className="mr-2" />, text: "What immediate actions should I take?" },
     { icon: <Battery className="mr-2" />, text: "Why is the battery's State of Health important?" },
     { icon: <Battery className="mr-2" />, text: "How do temperature readings affect performance?" },
-    { icon: <Tool className="mr-2" />, text: "What is the workSafe procedure?" },
-    { icon: <Tool className="mr-2" />, text: "How do I safely disconnect the vehicle for analysis?" },
-    { icon: <Tool className="mr-2" />, text: "What maintenance should be scheduled based on this report?" },
+    { icon: <Wrench className="mr-2" />, text: "What is the workSafe procedure?" },
+    { icon: <Wrench className="mr-2" />, text: "How do I safely disconnect the vehicle for analysis?" },
+    { icon: <Wrench className="mr-2" />, text: "What maintenance should be scheduled based on this report?" },
   ];
 
   return (

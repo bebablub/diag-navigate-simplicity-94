@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { AlertTriangle, Battery, Car, Tool, HelpCircle } from 'lucide-react';
+import { AlertTriangle, Battery, Car, Wrench, HelpCircle } from 'lucide-react';
 import { Card } from './ui/card';
 import { Button } from './ui/button';
 import SafetyAlerts from './insights/SafetyAlerts';
