@@ -47,6 +47,10 @@ interface HVCheckReportDetailsProps {
 }
 
 const HVCheckReportDetails: React.FC<HVCheckReportDetailsProps> = ({ safetyIndicators, batteryInformation, errorCodes }) => {
+  if (!safetyIndicators || !batteryInformation || !errorCodes) {
+    return <div>Loading details...</div>;
+  }
+
   return (
     <div className="p-6 border border-gray-300 bg-white">
       <div className="flex justify-between items-start mb-8">

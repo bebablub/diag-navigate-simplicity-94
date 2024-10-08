@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import DiagnosticProtocolViewer from './DiagnosticProtocolViewer';
 import InsightsPanel from './InsightsPanel';
-import HVCheckReportOverview from './HVCheckReportOverview';
-import HVCheckReportDetails from './HVCheckReportDetails';
 
 // This interface represents the structure of the data we expect from the API
 interface ReportData {
@@ -84,17 +82,7 @@ const HVCheckReport: React.FC = () => {
   return (
     <div className="flex h-screen">
       <div className="w-3/5 bg-gray-100 overflow-auto">
-        <DiagnosticProtocolViewer>
-          <HVCheckReportOverview
-            generalData={reportData.general}
-            overviewResult={reportData.overview}
-          />
-          <HVCheckReportDetails
-            safetyIndicators={reportData.safetyIndicators}
-            batteryInformation={reportData.batteryInformation}
-            errorCodes={reportData.errorCodes}
-          />
-        </DiagnosticProtocolViewer>
+        <DiagnosticProtocolViewer reportData={reportData} />
       </div>
       <div className="w-2/5 bg-white">
         <InsightsPanel reportData={reportData} />

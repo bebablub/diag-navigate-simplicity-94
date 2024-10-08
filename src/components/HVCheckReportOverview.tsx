@@ -21,6 +21,10 @@ interface HVCheckReportOverviewProps {
 }
 
 const HVCheckReportOverview: React.FC<HVCheckReportOverviewProps> = ({ generalData, overviewResult }) => {
+  if (!generalData || !overviewResult) {
+    return <div>Loading overview...</div>;
+  }
+
   return (
     <div className="p-6 border border-gray-300 bg-white">
       <div className="flex justify-between items-start mb-8">

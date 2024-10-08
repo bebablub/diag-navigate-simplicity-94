@@ -3,7 +3,11 @@ import { Search, ZoomIn, ZoomOut, Download, Printer } from 'lucide-react';
 import HVCheckReportOverview from './HVCheckReportOverview';
 import HVCheckReportDetails from './HVCheckReportDetails';
 
-const DiagnosticProtocolViewer: React.FC = () => {
+interface DiagnosticProtocolViewerProps {
+  reportData: any; // Replace 'any' with a more specific type if available
+}
+
+const DiagnosticProtocolViewer: React.FC<DiagnosticProtocolViewerProps> = ({ reportData }) => {
   const [zoomLevel, setZoomLevel] = useState(100);
 
   return (
@@ -45,8 +49,15 @@ const DiagnosticProtocolViewer: React.FC = () => {
       <div className="flex-grow overflow-auto p-4">
         <div className="bg-white p-4 shadow-md" style={{ transform: `scale(${zoomLevel / 100})`, transformOrigin: 'top left' }}>
           <div className="space-y-4">
-            <HVCheckReportOverview />
-            <HVCheckReportDetails />
+            <HVCheckReportOverview
+              generalData={reportData.general}
+              overviewResult={reportData.overview}
+            />
+            <HVCheckReportDetails
+              safetyIndicators={reportData.safetyIndicators}
+              batteryInformation={reportData.batteryInformation}
+              errorCodes={reportData.errorCodes}
+            />
           </div>
         </div>
       </div>
