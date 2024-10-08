@@ -2,9 +2,58 @@ import React, { useState, useEffect } from 'react';
 import DiagnosticProtocolViewer from './DiagnosticProtocolViewer';
 import InsightsSummariesModule from './InsightsSummariesModule';
 
-// Define the ReportData interface (you may want to move this to a separate types file)
+// Define the ReportData interface
 interface ReportData {
-  // ... add all the necessary fields here, matching the structure in HVCheckReport.tsx
+  general: {
+    date: string;
+    protocolNumber: string;
+    brand: string;
+    model: string;
+    mileage: string;
+    vin: string;
+  };
+  overview: {
+    hvSystem: string;
+    isolationResistance: string;
+    errorCodes: string;
+  };
+  safetyIndicators: {
+    isolationResistance: {
+      minusPoleBattery: string;
+      plusPoleBattery: string;
+      minusPoleSystem: string;
+      plusPoleSystem: string;
+    };
+    hvSystem: {
+      crashSignal: string;
+      pilotLine: string;
+      voltageFreedom: string;
+      chargingContactorPositive: string;
+      chargingContactorNegative: string;
+      batteryContactorPositive: string;
+      batteryContactorNegative: string;
+    };
+  };
+  batteryInformation: {
+    controlUnitData: {
+      stateOfHealth: string;
+      stateOfCharge: string;
+      maxDiffCellCharge: string;
+      maxDiffCellVoltage: string;
+      maxCellVoltage: string;
+      minCellVoltage: string;
+    };
+    temperatures: {
+      batteryTemperature: string;
+      maxDiffCellTemperature: string;
+      maxCellTemperature: string;
+      minCellTemperature: string;
+    };
+  };
+  errorCodes: Array<{
+    code: string;
+    description: string;
+  }>;
 }
 
 const EVDiagnosticModule: React.FC = () => {
@@ -32,7 +81,7 @@ const EVDiagnosticModule: React.FC = () => {
   return (
     <div className="flex h-screen">
       <div className="w-2/3 bg-gray-100">
-        <DiagnosticProtocolViewer reportData={reportData} />
+        <DiagnosticProtocolViewer reportData={reportData} zoomLevel={100} />
       </div>
       <div className="w-1/3 bg-white">
         <InsightsSummariesModule />
