@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import DiagnosticProtocolViewer from './DiagnosticProtocolViewer';
 import InsightsPanel from './InsightsPanel';
 import { simulatedApiResponse } from '../utils/simulatedApiResponse';
+import { Card } from './ui/card';
 
 interface ReportData {
   general: {
@@ -79,17 +80,22 @@ const HVCheckReport: React.FC = () => {
   }
 
   return (
-    <div className="flex flex-col lg:flex-row h-screen">
-      <div className="w-full lg:w-2/3 bg-gray-100 flex flex-col">
-        <div className="bg-white p-4 shadow-md">
-          {/* PDF tooling */}
-          {/* ... Add PDF tooling buttons here */}
-        </div>
-        <div className="flex-grow overflow-auto">
+    <div className="flex flex-col lg:flex-row h-screen bg-gray-100">
+      <div className="w-full lg:w-2/3 flex flex-col p-4">
+        <Card className="mb-4 p-4 shadow-md">
+          <h1 className="text-2xl font-bold mb-2">
+            {reportData.general.brand} {reportData.general.model} - HV-CHECK Report
+          </h1>
+          <p className="text-sm text-gray-600">
+            Protocol: {reportData.general.protocolNumber} | Date: {reportData.general.date}
+          </p>
+          {/* Add PDF tooling buttons here */}
+        </Card>
+        <div className="flex-grow overflow-auto space-y-4">
           <DiagnosticProtocolViewer reportData={reportData} />
         </div>
       </div>
-      <div className="w-full lg:w-1/3 bg-white border-l border-gray-300">
+      <div className="w-full lg:w-1/3 bg-gray-50">
         <InsightsPanel />
       </div>
     </div>
