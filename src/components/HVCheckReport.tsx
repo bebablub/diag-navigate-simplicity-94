@@ -3,6 +3,8 @@ import DiagnosticProtocolViewer from './DiagnosticProtocolViewer';
 import InsightsPanel from './InsightsPanel';
 import { simulatedApiResponse } from '../utils/simulatedApiResponse';
 import { Card } from './ui/card';
+import { Button } from './ui/button';
+import { Download, Printer, ZoomIn, ZoomOut, Mail } from 'lucide-react';
 
 interface ReportData {
   general: {
@@ -59,6 +61,7 @@ interface ReportData {
 
 const HVCheckReport: React.FC = () => {
   const [reportData, setReportData] = useState<ReportData | null>(null);
+  const [zoomLevel, setZoomLevel] = useState(100);
 
   useEffect(() => {
     // Simulate API call with a delay
@@ -83,19 +86,29 @@ const HVCheckReport: React.FC = () => {
     <div className="flex flex-col lg:flex-row h-screen bg-gray-100">
       <div className="w-full lg:w-2/3 flex flex-col p-4">
         <Card className="mb-4 p-4 shadow-md">
-          <h1 className="text-2xl font-bold mb-2">
-            {reportData.general.brand} {reportData.general.model} - HV-CHECK Report
-          </h1>
-          <p className="text-sm text-gray-600">
-            Protocol: {reportData.general.protocolNumber} | Date: {reportData.general.date}
-          </p>
-          {/* Add PDF tooling buttons here */}
+          <div className="flex justify-between items-center mb-4">
+            <div>
+              <h1 className="text-2xl font-bold">
+                {reportData.general.brand} {reportData.general.model} - HV-CHECK Report
+              </h1>
+              <p className="text-sm text-gray-600">
+                Protocol: {reportData.general.protocolNumber} | Date: {reportData.general.date}
+              </p>
+            </div>
+            <div className="flex space-x-2">
+              <Button variant="outline" size="icon"><ZoomIn size={20} /></Button>
+              <Button variant="outline" size="icon"><ZoomOut size={20} /></Button>
+              <Button variant="outline" size="icon"><Download size={20} /></Button>
+              <Button variant="outline" size="icon"><Printer size={20} /></Button>
+              <Button variant="outline" size="icon"><Mail size={20} /></Button>
+            </div>
+          </div>
         </Card>
         <div className="flex-grow overflow-auto space-y-4">
-          <DiagnosticProtocolViewer reportData={reportData} />
+          <DiagnosticProtocolViewer reportData={reportData} zoomLevel={zoomLevel} />
         </div>
       </div>
-      <div className="w-full lg:w-1/3 bg-gray-50">
+      <div className="w-full lg:w-1/3 bg-gray-100 p-4">
         <InsightsPanel />
       </div>
     </div>

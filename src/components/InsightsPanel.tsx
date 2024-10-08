@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Search } from 'lucide-react';
+import { Card } from './ui/card';
 import CustomerFriendlySummary from './insights/CustomerFriendlySummary';
 import MainIssuesDetected from './insights/MainIssuesDetected';
 import SafetyAssessment from './insights/SafetyAssessment';
@@ -10,9 +11,9 @@ const InsightsPanel: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState('');
 
   return (
-    <div className="w-full h-full bg-gray-50 overflow-y-auto">
-      <div className="p-6 space-y-6">
-        <h2 className="text-xl font-semibold text-gray-600 mt-4">Report Insights and Explanations</h2>
+    <div className="w-full h-full overflow-y-auto space-y-4">
+      <Card className="p-4 shadow-md">
+        <h2 className="text-xl font-semibold text-gray-800 mb-4">Report Insights and Explanations</h2>
         <div className="relative">
           <input
             type="text"
@@ -23,16 +24,32 @@ const InsightsPanel: React.FC = () => {
           />
           <Search className="absolute left-3 top-2.5 text-gray-400" size={20} />
         </div>
-        <div className="space-y-6">
+      </Card>
+      <div className="space-y-4">
+        <InsightCard>
           <CustomerFriendlySummary />
+        </InsightCard>
+        <InsightCard>
           <MainIssuesDetected />
+        </InsightCard>
+        <InsightCard>
           <SafetyAssessment />
+        </InsightCard>
+        <InsightCard>
           <ErrorCodeDefinitions />
+        </InsightCard>
+        <InsightCard>
           <BatteryHealthComparison />
-        </div>
+        </InsightCard>
       </div>
     </div>
   );
 };
+
+const InsightCard: React.FC<{ children: React.ReactNode }> = ({ children }) => (
+  <Card className="p-4 shadow-md hover:shadow-lg transition-shadow duration-300 cursor-pointer">
+    {children}
+  </Card>
+);
 
 export default InsightsPanel;

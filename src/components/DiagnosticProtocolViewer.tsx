@@ -1,10 +1,8 @@
-import React, { useState } from 'react';
-import { Search, ZoomIn, ZoomOut, Download, Printer } from 'lucide-react';
+import React from 'react';
 import HVCheckReportOverview from './HVCheckReportOverview';
 import HVCheckReportDetails from './HVCheckReportDetails';
 
 interface DiagnosticProtocolViewerProps {
-  reportData: {
   reportData: {
     general: {
       date: string;
@@ -57,12 +55,10 @@ interface DiagnosticProtocolViewerProps {
       description: string;
     }>;
   };
-  };
+  zoomLevel: number;
 }
 
-const DiagnosticProtocolViewer: React.FC<DiagnosticProtocolViewerProps> = ({ reportData }) => {
-  const [zoomLevel, setZoomLevel] = useState(100);
-
+const DiagnosticProtocolViewer: React.FC<DiagnosticProtocolViewerProps> = ({ reportData, zoomLevel }) => {
   return (
     <div className="space-y-4">
       <div className="bg-white shadow-md max-w-[210mm] mx-auto" style={{ transform: `scale(${zoomLevel / 100})`, transformOrigin: 'top center' }}>
