@@ -1,123 +1,157 @@
 import React from 'react';
 
-const HVCheckReportDetails: React.FC = () => {
+interface SafetyIndicators {
+  isolationResistance: {
+    minusPoleBattery: string;
+    plusPoleBattery: string;
+    minusPoleSystem: string;
+    plusPoleSystem: string;
+  };
+  hvSystem: {
+    crashSignal: string;
+    pilotLine: string;
+    voltageFreedom: string;
+    chargingContactorPositive: string;
+    chargingContactorNegative: string;
+    batteryContactorPositive: string;
+    batteryContactorNegative: string;
+  };
+}
+
+interface BatteryInformation {
+  controlUnitData: {
+    stateOfHealth: string;
+    stateOfCharge: string;
+    maxDiffCellCharge: string;
+    maxDiffCellVoltage: string;
+    maxCellVoltage: string;
+    minCellVoltage: string;
+  };
+  temperatures: {
+    batteryTemperature: string;
+    maxDiffCellTemperature: string;
+    maxCellTemperature: string;
+    minCellTemperature: string;
+  };
+}
+
+interface ErrorCode {
+  code: string;
+  description: string;
+}
+
+interface HVCheckReportDetailsProps {
+  safetyIndicators: SafetyIndicators;
+  batteryInformation: BatteryInformation;
+  errorCodes: ErrorCode[];
+}
+
+const HVCheckReportDetails: React.FC<HVCheckReportDetailsProps> = ({ safetyIndicators, batteryInformation, errorCodes }) => {
   return (
-    <div className="p-4 border border-gray-300">
-      <div className="flex justify-between items-start mb-4">
+    <div className="p-6 border border-gray-300 bg-white">
+      <div className="flex justify-between items-start mb-8">
         <div>
-          <h1 className="text-2xl font-bold">HV-CHECK</h1>
+          <h1 className="text-3xl font-bold">HV-CHECK</h1>
           <h2 className="text-xl">Zustandprotokoll HV Sicherheit</h2>
         </div>
-        <div className="text-right">
-          <img src="/avl-ditest-logo.png" alt="AVL DITEST" className="w-24" />
-        </div>
+        <img src="/avl-ditest-logo.png" alt="AVL DITEST" className="w-24" />
       </div>
       
-      <div className="mb-4">
-        <h3 className="font-bold mb-2">Prüfdaten</h3>
-        <div className="flex justify-between">
-          <span>Datum: 23.02.2023</span>
-          <span>Protokollnr.: HV-2023-0001-123</span>
-        </div>
-      </div>
-      
-      <div className="mb-4">
-        <h3 className="font-bold mb-2">Sicherheitsindikatoren</h3>
-        <div className="grid grid-cols-2 gap-4">
+      <div className="mb-8">
+        <h3 className="text-lg font-bold mb-4">Sicherheitsindikatoren</h3>
+        <div className="grid grid-cols-2 gap-6">
           <div>
-            <h4 className="font-semibold">Isolationswiderstände</h4>
-            <div className="grid grid-cols-2 gap-2">
+            <h4 className="font-semibold mb-2">Isolationswiderstände</h4>
+            <div className="grid grid-cols-2 gap-y-1 text-sm">
               <div>Minuspol Hochvolt-Batterie</div>
-              <div>10.801 kOhm</div>
+              <div>{safetyIndicators.isolationResistance.minusPoleBattery}</div>
               <div>Pluspol Hochvolt-Batterie</div>
-              <div>9.210 kOhm</div>
+              <div>{safetyIndicators.isolationResistance.plusPoleBattery}</div>
               <div>Minuspol im Hochvolt-Gesamtsystem</div>
-              <div>4.410 kOhm</div>
+              <div>{safetyIndicators.isolationResistance.minusPoleSystem}</div>
               <div>Pluspol im Hochvolt-Gesamtsystem</div>
-              <div>4.100 kOhm</div>
+              <div>{safetyIndicators.isolationResistance.plusPoleSystem}</div>
             </div>
           </div>
           <div>
-            <h4 className="font-semibold">HV-System</h4>
-            <div className="grid grid-cols-2 gap-2">
+            <h4 className="font-semibold mb-2">HV-System</h4>
+            <div className="grid grid-cols-2 gap-y-1 text-sm">
               <div>Crashsignal</div>
-              <div>nicht aktiv</div>
+              <div>{safetyIndicators.hvSystem.crashSignal}</div>
               <div>Pilotlinie</div>
-              <div>aktiv</div>
+              <div>{safetyIndicators.hvSystem.pilotLine}</div>
               <div>Status Spannungsfreiheit</div>
-              <div>nicht aktiv</div>
+              <div>{safetyIndicators.hvSystem.voltageFreedom}</div>
               <div>Status Ladeschütz +</div>
-              <div>offen</div>
+              <div>{safetyIndicators.hvSystem.chargingContactorPositive}</div>
               <div>Status Ladeschütz -</div>
-              <div>offen</div>
+              <div>{safetyIndicators.hvSystem.chargingContactorNegative}</div>
               <div>Schütz am Pluspol Batterie</div>
-              <div>geschlossen</div>
+              <div>{safetyIndicators.hvSystem.batteryContactorPositive}</div>
               <div>Schütz am Minuspol Batterie</div>
-              <div>offen</div>
+              <div>{safetyIndicators.hvSystem.batteryContactorNegative}</div>
             </div>
           </div>
         </div>
       </div>
       
-      <div className="mb-4">
-        <h3 className="font-bold mb-2">Batterieinformationen</h3>
-        <div className="grid grid-cols-2 gap-4">
+      <div className="mb-8">
+        <h3 className="text-lg font-bold mb-4">Batterieinformationen</h3>
+        <div className="grid grid-cols-2 gap-6">
           <div>
-            <h4 className="font-semibold">Steuergerätedaten</h4>
-            <div className="grid grid-cols-2 gap-2">
+            <h4 className="font-semibold mb-2">Steuergerätedaten</h4>
+            <div className="grid grid-cols-2 gap-y-1 text-sm">
               <div>State of Health (SOH)</div>
-              <div>95 %</div>
+              <div>{batteryInformation.controlUnitData.stateOfHealth}</div>
               <div>Ladezustand (SOC)</div>
-              <div>90 %</div>
+              <div>{batteryInformation.controlUnitData.stateOfCharge}</div>
               <div>max. diff. Zell-Ladezustand</div>
-              <div>0,8 %</div>
+              <div>{batteryInformation.controlUnitData.maxDiffCellCharge}</div>
               <div>max. diff. Zellspannung</div>
-              <div>0,34 V</div>
+              <div>{batteryInformation.controlUnitData.maxDiffCellVoltage}</div>
               <div>max. Zellspannung</div>
-              <div>4,2 V</div>
+              <div>{batteryInformation.controlUnitData.maxCellVoltage}</div>
               <div>min. Zellspannung</div>
-              <div>3,86 V</div>
+              <div>{batteryInformation.controlUnitData.minCellVoltage}</div>
             </div>
           </div>
           <div>
-            <h4 className="font-semibold">Temperaturen</h4>
-            <div className="grid grid-cols-2 gap-2">
+            <h4 className="font-semibold mb-2">Temperaturen</h4>
+            <div className="grid grid-cols-2 gap-y-1 text-sm">
               <div>Temperatur Batterie</div>
-              <div>25 °C</div>
+              <div>{batteryInformation.temperatures.batteryTemperature}</div>
               <div>max. diff. Zelltemperatur</div>
-              <div>6,4 °C</div>
+              <div>{batteryInformation.temperatures.maxDiffCellTemperature}</div>
               <div>max. Zelltemperatur</div>
-              <div>22,6 °C</div>
+              <div>{batteryInformation.temperatures.maxCellTemperature}</div>
               <div>min. Zelltemperatur</div>
-              <div>16,2 °C</div>
+              <div>{batteryInformation.temperatures.minCellTemperature}</div>
             </div>
           </div>
         </div>
       </div>
       
-      <div className="mb-4">
-        <h3 className="font-bold mb-2">Fehlercodes</h3>
-        <table className="w-full">
+      <div className="mb-8">
+        <h3 className="text-lg font-bold mb-2">Fehlercodes</h3>
+        <table className="w-full text-sm">
           <thead>
-            <tr>
-              <th className="text-left">Fehlercodes</th>
-              <th className="text-left">Beschreibung</th>
+            <tr className="border-b">
+              <th className="text-left py-2">Fehlercodes</th>
+              <th className="text-left py-2">Beschreibung</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>[PGA1F00] 4560EFG</td>
-              <td>Steuergerät für Batterieenergiemanagement Fehlfunktion</td>
-            </tr>
-            <tr>
-              <td>[P0C6F00] 567DRFG</td>
-              <td>Geber 10 für Temperatur für Hybrid-/Hochvoltbatterie Kurzschluss nach Masse</td>
-            </tr>
+            {errorCodes.map((error, index) => (
+              <tr key={index} className="border-b">
+                <td className="py-2">{error.code}</td>
+                <td className="py-2">{error.description}</td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>
       
-      <div className="mt-4 text-sm text-right">
+      <div className="mt-8 text-xs text-right">
         <p>AVL DITEST XDS iReport v2.0.03 * VC1 1.28.05</p>
         <p>2/2</p>
       </div>
