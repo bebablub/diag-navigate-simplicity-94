@@ -1,47 +1,47 @@
 import React from 'react';
+import { Card } from '../ui/card';
 import { Battery } from 'lucide-react';
 
 const BatteryHealthComparison: React.FC = () => {
-  const batteryHealth = 98.85;
-  const normalRange = { min: 80, max: 100 };
+  const batterySOH = 98.85;
+  const batterySOC = 85.59;
+  const normalRange = { min: 90, max: 100 };
 
   return (
-    <div className="border rounded-lg p-4">
+    <Card className="p-4 shadow-md">
       <div className="flex items-center mb-4">
-        <Battery className="mr-2" />
-        <h3 className="text-lg font-semibold">5. Battery Health Comparison</h3>
+        <Battery className="mr-2 text-green-500" />
+        <h3 className="text-lg font-semibold">Battery Health Comparison</h3>
       </div>
-      <div className="text-3xl font-bold mb-4">
-        State of Health: {batteryHealth.toFixed(2)}%
+      <div className="mb-4">
+        <p className="text-xl font-bold">State of Health (SOH): {batterySOH.toFixed(2)}%</p>
+        <p>State of Charge (SOC): {batterySOC.toFixed(2)}%</p>
       </div>
-      <div className="relative h-8 bg-gray-200 rounded-full mb-4">
-        <div
-          className="absolute h-full bg-green-500 rounded-full"
-          style={{ width: `${batteryHealth}%` }}
-        ></div>
-        <div
-          className="absolute h-full border-r-2 border-blue-500"
-          style={{ left: `${normalRange.min}%` }}
-        ></div>
-        <div
-          className="absolute h-full border-r-2 border-blue-500"
-          style={{ left: `${normalRange.max}%` }}
-        ></div>
+      <div className="mb-4">
+        <div className="w-full bg-gray-200 rounded-full h-2.5 mb-2">
+          <div
+            className="bg-green-600 h-2.5 rounded-full"
+            style={{ width: `${batterySOH}%` }}
+          ></div>
+        </div>
+        <p className="text-sm text-gray-600">
+          Normal Range: {normalRange.min}% - {normalRange.max}%
+        </p>
       </div>
-      <p className="mb-2">
-        Your vehicle's battery health is within the normal range of {normalRange.min}% to {normalRange.max}%.
-      </p>
-      <p className="mb-4">
-        The current state of health indicates excellent battery condition, suggesting optimal performance and range.
-      </p>
-      <h4 className="font-semibold mb-2">Recommendations:</h4>
-      <ul className="list-disc list-inside">
-        <li>Continue with regular charging habits</li>
-        <li>Avoid extreme temperature exposure when possible</li>
-        <li>Schedule your next battery check-up in 6 months</li>
-      </ul>
-      <a href="#" className="text-blue-500 hover:underline mt-4 inline-block">Learn more about EV battery health</a>
-    </div>
+      <div className="mb-4">
+        <h4 className="font-semibold mb-2">Comparison with Standards:</h4>
+        <p>
+          An SOH above {normalRange.min}% is considered good for this vehicle model and age.
+          Your vehicle's battery is well above the expected threshold for optimal performance.
+        </p>
+      </div>
+      <div>
+        <h4 className="font-semibold mb-2">Recommendations:</h4>
+        <p>
+          Maintain regular check-ups and perform battery conditioning services as needed to keep the battery in excellent health.
+        </p>
+      </div>
+    </Card>
   );
 };
 
